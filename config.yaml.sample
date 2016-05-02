@@ -1,0 +1,6 @@
+---
+login:
+  id: {{ SEGA ID }}
+  password: {{ Password }}
+output:
+  dir: ./json

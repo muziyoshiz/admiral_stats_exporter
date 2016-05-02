@@ -1,0 +1,26 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    domain_name (0.5.20160310)
+      unf (>= 0.0.5, < 1.0.0)
+    faraday (0.8.11)
+      multipart-post (~> 1.2.0)
+    faraday-cookie_jar (0.0.6)
+      faraday (>= 0.7.4)
+      http-cookie (~> 1.0.0)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
+    multipart-post (1.2.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  faraday (~> 0.8.11)
+  faraday-cookie_jar (~> 0.0.6)
+
+BUNDLED WITH
+   1.10.4
