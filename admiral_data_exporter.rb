@@ -32,6 +32,10 @@ API_URLS = [
   'Campaign/history',
   'Campaign/info',
   'Campaign/present',
+
+  # From REVISION 2 (2016-06-30)
+  'CharacterList/info',
+  'EquipList/info',
 ]
 
 # Create new directory for latest JSON files
