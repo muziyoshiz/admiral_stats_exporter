@@ -1,6 +1,6 @@
-# admiral-data-exporter
+# admiral_stats_exporter
 
-Simple admiral data exporter from kancolle-arcade.net
+Simple admiral stats exporter from kancolle-arcade.net
 
 # How to use
 

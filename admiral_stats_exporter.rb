@@ -1,4 +1,4 @@
-# Simple admiral data exporter from kancolle-arcade.net
+# Simple admiral stats exporter from kancolle-arcade.net
 require 'faraday'
 require 'faraday-cookie_jar'
 require 'yaml'
