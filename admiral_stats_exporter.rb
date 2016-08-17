@@ -36,6 +36,9 @@ API_URLS = [
   # From REVISION 2 (2016-06-30)
   'CharacterList/info',
   'EquipList/info',
+
+  # From 2016-07-26
+  'Quest/info',
 ]
 
 # Create new directory for latest JSON files
