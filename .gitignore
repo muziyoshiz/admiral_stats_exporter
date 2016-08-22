@@ -1,2 +1,5 @@
 /json
 config.yaml
+
+# RubyMine
+/.idea

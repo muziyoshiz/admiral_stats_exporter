@@ -42,7 +42,8 @@ API_URLS = [
 ]
 
 # Create new directory for latest JSON files
-json_dir = config['output']['dir'] + "/" + Time.now.strftime('%Y%m%d_%H%M%S')
+timestamp = Time.now.strftime('%Y%m%d_%H%M%S')
+json_dir = config['output']['dir'] + "/" + timestamp
 FileUtils.mkdir_p(json_dir)
 
 conn = Faraday.new(:url => BASE_URL) do |faraday|
@@ -81,7 +82,7 @@ API_URLS.each do |api_url|
   end
 
   # Create filename from URL automatically
-  filename = api_url.gsub('/', '_') + '.json'
+  filename = api_url.gsub('/', '_') + "_#{timestamp}.json"
 
   File.write(json_dir + '/' + filename, res.body)
 end
