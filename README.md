@@ -43,6 +43,10 @@ admiral_stats_exporter は、以下のようなファイル名で、プレイデ
 | 基本情報 | Personal_basicInfo_yyyymmdd_hhmmss.json |
 | 艦娘図鑑 | TcBook_info_yyyymmdd_hhmmss.json |
 | 艦娘一覧 | CharacterList_info_yyyymmdd_hhmmss.json |
+| 装備図鑑 | EquipBook_info_yyyymmdd_hhmmss.json |
+| 装備一覧 | EquipList_info_yyyymmdd_hhmmss.json |
+| 海域情報 | Area_captureInfo_yyyymmdd_hhmmss.json |
+| 任務一覧 | Quest_info_yyyymmdd_hhmmss.json |
 
 # 注意事項
 
