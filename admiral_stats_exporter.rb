@@ -46,9 +46,10 @@ timestamp = Time.now.strftime('%Y%m%d_%H%M%S')
 json_dir = config['output']['dir'] + "/" + timestamp
 FileUtils.mkdir_p(json_dir)
 
-conn = Faraday.new(:url => BASE_URL) do |faraday|
+# Disable SSL verification for Windows support
+conn = Faraday.new(url: BASE_URL, ssl: { verify: false }) do |faraday|
   faraday.request  :url_encoded
-  faraday.response :logger
+#  faraday.response :logger
   faraday.use      :cookie_jar
   faraday.adapter  Faraday.default_adapter
 end
@@ -56,6 +57,11 @@ end
 # Access to retrieve my session ID (JSESSIONID)
 res = conn.get do |req|
   req.url TOP_URL
+end
+
+unless res.status == 200
+  puts "ERROR: Failed to access #{BASE_URL}#{TOP_URL} (status code = #{res.status})"
+  exit
 end
 
 # Login (POST)
@@ -69,7 +75,10 @@ res = conn.post do |req|
   req.body = "{\"id\":\"#{config['login']['id']}\",\"password\":\"#{config['login']['password']}\"}"
 end
 
-# TODO Check login result
+unless res.status == 200
+  puts "ERROR: Failed to login (status code = #{res.status})"
+  exit
+end
 
 # Access to APIs
 API_URLS.each do |api_url|
@@ -84,5 +93,11 @@ API_URLS.each do |api_url|
   # Create filename from URL automatically
   filename = api_url.gsub('/', '_') + "_#{timestamp}.json"
 
+  unless res.status == 200
+    puts "ERROR: Failed to download #{filename} (status code = #{res.status})"
+    next
+  end
+
   File.write(json_dir + '/' + filename, res.body)
+  puts "Succeeded to download #{filename}"
 end
