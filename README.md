@@ -11,7 +11,7 @@
 
 | エクスポータの種類 | 対応OS | メリット |
 |:----------|:---------------|:------|
-| Ruby 版 | Windows, Mac, Linux など（Ruby の動作する環境全般） | 対応 OS が多い、最新機能はこちらに実装 |
+| Ruby 版 | Windows, Mac, Linux など（Ruby の動作する環境全般） | 対応 OS が多い、実験的な機能はこちらから実装 |
 | PowerShell 版 | Windows（PowerShell 3.0以降が必要） | インストール作業が簡単 |
 
 PowerShell 版は <a href="https://twitter.com/sophiarcp" target="_blank">@sophiarcp</a> さんにご提供いただきました。Thanks!
