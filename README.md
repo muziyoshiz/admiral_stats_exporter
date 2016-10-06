@@ -12,7 +12,7 @@
 | エクスポータの種類 | 対応OS | メリット |
 |:----------|:---------------|:------|
 | Ruby 版 | Windows, Mac, Linux など（Ruby の動作する環境全般） | 対応 OS が多い、実験的な機能はこちらから実装 |
-| PowerShell 版 | Windows（PowerShell 3.0以降が必要） | インストール作業が簡単 |
+| PowerShell 版 | Windows（PowerShell 3.0以降が必要） | インストール作業が簡単（ただし、実行権限の設定が必要な場合あり） |
 
 PowerShell 版は <a href="https://twitter.com/sophiarcp" target="_blank">@sophiarcp</a> さんにご提供いただきました。Thanks!
 
@@ -113,6 +113,15 @@ admiral_stats_exporter_ps.ps1 を右クリックしてメニューを表示し�
 
 初回実行時のみ認証情報登録ダイアログが表示されるので、プレイヤーズサイトの [提督情報ページ](https://kancolle-arcade.net/ac/#/top) のID/パスワードを入力してください。
 同フォルダの cred.xml にID/パスワードが記録されます。
+
+### PowerShell 版を実行できなかった場合
+
+一部のユーザから、「PowerShell 版を実行しても即座に終了してしまう」という問題が報告されています。
+
+この問題が発生する場合、PowerShell の実行ポリシーを変更すると、実行できる可能性があります。  
+以下のサイトなどを参考に、コマンドラインから実行してみてください。
+
+- [Powershellを楽に実行してもらうには - Qiita](http://qiita.com/tomoko523/items/df8e384d32a377381ef9 "Powershellを楽に実行してもらうには - Qiita")
 
 ### 注意点
 
