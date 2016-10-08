@@ -114,21 +114,23 @@ git を使える場合は master ブランチを clone しても OK です。
 
 ## PowerShell 版の実行
 
-admiral_stats_exporter_ps.ps1 を右クリックしてメニューを表示し、「PowerShellで実行」をクリックします。  
+admiral_stats_exporter_ps.bat をダブルクリックして実行します。  
 実行に成功すると、 `json/コマンドの実行日時` ディレクトリに、最新のプレイデータがエクスポートされます。
 
 初回実行時のみ認証情報登録ダイアログが表示されるので、プレイヤーズサイトの [提督情報ページ](https://kancolle-arcade.net/ac/#/top) のID/パスワードを入力してください。
 同フォルダの cred.xml にID/パスワードが記録されます。
 
-### PowerShell 版を実行できなかった場合
+### PowerShell 版を実行時にセキュリティ警告が表示された場合
 
-一部のユーザから、「PowerShell 版を実行しても即座に終了してしまう」という問題が報告されています。
+PowerShell 版の実行時に、セキュリティ警告が表示される場合があります。その場合は、以下のいずれかの方法で実行してください。
 
-この問題が発生する場合、PowerShell の実行ポリシーを変更すると、実行できる可能性があります。  
-以下のサイトなどを参考に、PowerShell のプロンプトから実行してみてください。
-
-- [Powershellを楽に実行してもらうには - Qiita](http://qiita.com/tomoko523/items/df8e384d32a377381ef9 "Powershellを楽に実行してもらうには - Qiita")
--- 「コマンドラインから実行してもらう」の「powershell編」にある方法で実行できた、という報告があります
+1. 「[R] 一度だけ実行する」を選択して、bat ファイルの実行を一時的に許可する
+    - この方法で実行すると、ps1 ファイルの実行が一時的に許可されます。実行のたびに R の入力が必要です。
+2. bat ファイルが内部的に呼び出している admiral_stats_exporter_ps.ps1 の実行を許可する
+    - admiral_stats_exporter_ps.ps1 のプロパティを開き、「ブロックの解除」にチェックを入れてください。
+3. PowerShell の実行ポリシーを Restricted から RemoteSigned に変更してから、admiral_stats_exporter_ps.ps1 を直接実行する
+    - 上記の2つの方法で実行できない場合は、PowerShell の実行ポリシーを変更すると、実行できる可能性があります。以下のサイトの「コマンドラインから実行してもらう」などを参考にしてください。
+    - [Powershellを楽に実行してもらうには - Qiita](http://qiita.com/tomoko523/items/df8e384d32a377381ef9 "Powershellを楽に実行してもらうには - Qiita")
 
 ### 注意点
 
