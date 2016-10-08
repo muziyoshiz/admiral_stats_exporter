@@ -126,10 +126,10 @@ PowerShell 版の実行時に、セキュリティ警告が表示される場合
 
 1. 「[R] 一度だけ実行する」を選択して、bat ファイルの実行を一時的に許可する
     - この方法で実行すると、ps1 ファイルの実行が一時的に許可されます。実行のたびに R の入力が必要です。
-2. bat ファイルが内部的に呼び出している admiral_stats_exporter_ps.ps1 の実行を許可する
-    - admiral_stats_exporter_ps.ps1 のプロパティを開き、「ブロックの解除」にチェックを入れてください。
+2. admiral_stats_exporter_ps.bat と admiral_stats_exporter_ps.ps1 の実行を許可する
+    - admiral_stats_exporter_ps.bat と admiral_stats_exporter_ps.ps1 のプロパティを開き、「ブロックの解除」にチェックを入れてください。
 3. PowerShell の実行ポリシーを Restricted から RemoteSigned に変更してから、admiral_stats_exporter_ps.ps1 を直接実行する
-    - 上記の2つの方法で実行できない場合は、PowerShell の実行ポリシーを変更すると、実行できる可能性があります。以下のサイトの「コマンドラインから実行してもらう」などを参考にしてください。
+    - 上記の2つの方法で実行できない場合は、PowerShell の実行ポリシーを変更すると実行できる可能性があります。以下のサイトの「コマンドラインから実行してもらう」などを参考にしてください。
     - [Powershellを楽に実行してもらうには - Qiita](http://qiita.com/tomoko523/items/df8e384d32a377381ef9 "Powershellを楽に実行してもらうには - Qiita")
 
 ### 注意点
