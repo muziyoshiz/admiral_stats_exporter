@@ -114,7 +114,7 @@ git を使える場合は master ブランチを clone しても OK です。
 
 ## PowerShell 版の実行
 
-admiral_stats_exporter_ps.bat をダブルクリックして実行します。  
+admiral_stats_exporter_ps.ps1 を右クリックして「PowerShell で実行」を選択、または admiral_stats_exporter_ps.bat をダブルクリックして実行します。  
 実行に成功すると、 `json/コマンドの実行日時` ディレクトリに、最新のプレイデータがエクスポートされます。
 
 初回実行時のみ認証情報登録ダイアログが表示されるので、プレイヤーズサイトの [提督情報ページ](https://kancolle-arcade.net/ac/#/top) のID/パスワードを入力してください。
