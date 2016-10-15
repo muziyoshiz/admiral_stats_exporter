@@ -1,5 +1,7 @@
 # admiral_stats_exporter
 
+[![Join the chat at https://gitter.im/muziyoshiz/admiral_stats](https://badges.gitter.im/muziyoshiz/admiral_stats.svg)](https://gitter.im/muziyoshiz/admiral_stats?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 艦これアーケードの公式プレイヤーズサイト内にある
 [提督情報ページ](https://kancolle-arcade.net/ac/#/top)
 から、自分のプレイデータをエクスポートする非公式ツールです。
