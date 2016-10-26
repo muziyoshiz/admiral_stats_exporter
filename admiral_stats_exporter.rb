@@ -39,6 +39,11 @@ API_URLS = [
 
   # From 2016-07-26
   'Quest/info',
+
+  # From 2016-10-27
+  'Event/info',
+  # イベントの開始・終了日とイベントアイコンの表示制御フラグのみを返す
+  # 'Event/hold',
 ]
 
 # Create new directory for latest JSON files
