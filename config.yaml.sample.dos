@@ -1,6 +1,6 @@
 ---
 login:
-  id: {{ SEGA ID }}
-  password: {{ Password }}
+  id: SEGA_ID
+  password: PASSWORD
 output:
   dir: ./json

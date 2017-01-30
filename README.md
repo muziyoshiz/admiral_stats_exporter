@@ -77,11 +77,11 @@ bundle install
 
 config.yaml.sample （Windows の場合は config.yaml.sample.dos）をコピーして、同じディレクトリに config.yaml ファイルを作成してください。
 
-そして、`{{ SEGA ID }}` `{{ Password }}` と書かれた箇所に、公式プレイヤーズサイトへのログインに使った SEGA IDとパスワードを記入してください。
+そして、`SEGA_ID` `PASSWORD` と書かれた箇所に、公式プレイヤーズサイトへのログインに使った SEGA IDとパスワードを記入してください。
 
 ```
 login:
-  id: SEGAID
+  id: SEGA_ID
   password: PASSWORD
 output:
   dir: ./json
