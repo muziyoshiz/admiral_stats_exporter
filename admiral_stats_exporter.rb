@@ -52,6 +52,8 @@ API_URLS = [
 
 # Admiral Stats Import URL
 AS_IMPORT_URL = 'https://www.admiral-stats.com/api/v1/import'
+# User Agent for logging on www.admiral-stats.com
+AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-Ruby/1.6.1'
 
 # Check whether to upload JSON files or not
 do_upload = (ARGV[0] == '--upload')
@@ -136,6 +138,7 @@ if do_upload
   # Get currently importable file types
   res = as_conn.get do |req|
     req.url "#{AS_IMPORT_URL}/file_types"
+    req.headers['User-Agent'] = AS_HTTP_HEADER_UA
   end
 
   case res.status
