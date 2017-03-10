@@ -164,6 +164,7 @@ if do_upload
       res = as_conn.post do |req|
         req.url "#{AS_IMPORT_URL}/#{file_type}/#{timestamp}"
         req.headers['Content-Type'] = 'application/json'
+        req.headers['User-Agent'] = AS_HTTP_HEADER_UA
         req.body = json
       end
 
