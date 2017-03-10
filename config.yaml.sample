@@ -4,3 +4,5 @@ login:
   password: PASSWORD
 output:
   dir: ./json
+upload:
+  token: API_TOKEN

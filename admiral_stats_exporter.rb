@@ -2,6 +2,7 @@
 require 'faraday'
 require 'faraday-cookie_jar'
 require 'yaml'
+require 'json'
 
 # Read configurations
 config = YAML.load_file('config.yaml')
@@ -49,6 +50,18 @@ API_URLS = [
   'RoomItemList/info'
 ]
 
+# Admiral Stats Import URL
+AS_IMPORT_URL = 'https://www.admiral-stats.com/api/v1/import'
+# User Agent for logging on www.admiral-stats.com
+AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-Ruby/1.6.1'
+
+# Check whether to upload JSON files or not
+do_upload = (ARGV[0] == '--upload')
+if do_upload and config['upload']['token'].to_s.empty?
+  puts 'ERROR: For upload, authorization token is required in config.yaml'
+  exit 1
+end
+
 # Create new directory for latest JSON files
 timestamp = Time.now.strftime('%Y%m%d_%H%M%S')
 json_dir = config['output']['dir'] + "/" + timestamp
@@ -69,7 +82,7 @@ end
 
 unless res.status == 200
   puts "ERROR: Failed to access #{BASE_URL}#{TOP_URL} (status code = #{res.status})"
-  exit
+  exit 1
 end
 
 # Login (POST)
@@ -85,7 +98,7 @@ end
 
 unless res.status == 200
   puts "ERROR: Failed to login (status code = #{res.status})"
-  exit
+  exit 1
 end
 
 # Access to APIs
@@ -108,4 +121,65 @@ API_URLS.each do |api_url|
 
   File.write(json_dir + '/' + filename, res.body)
   puts "Succeeded to download #{filename}"
+end
+
+# Upload exported files to Admiral Stats
+if do_upload
+  # New connection for Admiral Stats API
+  as_conn = Faraday.new do |faraday|
+    faraday.request  :url_encoded
+#  faraday.response :logger
+    faraday.adapter  Faraday.default_adapter
+  end
+
+  # Set Authorization header
+  as_conn.authorization :Bearer, config['upload']['token']
+
+  # Get currently importable file types
+  res = as_conn.get do |req|
+    req.url "#{AS_IMPORT_URL}/file_types"
+    req.headers['User-Agent'] = AS_HTTP_HEADER_UA
+  end
+
+  case res.status
+    when 200
+      importable_file_types = JSON.parse(res.body)
+      puts "Importable file types: #{importable_file_types.join(', ')}"
+    when 401
+      json = JSON.parse(res.body)
+      json['errors'].each do |error|
+        puts "ERROR: #{error['message']}"
+      end
+      exit 1
+  end
+
+  Dir::foreach(json_dir) do |f|
+    if f =~ /^(.+)_(\d{8}_\d{6})\.json$/
+      file_type, timestamp = $1, $2
+      next unless importable_file_types.include?(file_type)
+
+      # Open, read and close file
+      json = open(File.join(json_dir, f), &:read)
+
+      res = as_conn.post do |req|
+        req.url "#{AS_IMPORT_URL}/#{file_type}/#{timestamp}"
+        req.headers['Content-Type'] = 'application/json'
+        req.body = json
+      end
+
+      case res.status
+        when 200, 201
+          json = JSON.parse(res.body)
+          puts "#{json['data']['message']}（ファイル名：#{f}）"
+        when 400, 401
+          json = JSON.parse(res.body)
+          json['errors'].each do |error|
+            puts "ERROR: #{error['message']}（ファイル名：#{f}）"
+          end
+        else
+          # Unexpected error
+          puts "ERROR: #{res.body}"
+      end
+    end
+  end
 end

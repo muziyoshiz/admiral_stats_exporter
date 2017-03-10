@@ -8,17 +8,19 @@
 
 # Ruby 版と PowerShell 版があります
 
-同じ機能を提供する、2種類のエクスポータ（Ruby 版、PowerShell 版）を公開しています。  
-お使いの環境に合わせて、便利な方をお使いください。
+同じ機能を提供する、2種類のエクスポータ（Ruby 版、PowerShell 版）を公開しています。 
+また、[Admiral Stats の使い方](https://www.admiral-stats.com/manual/exporter) にてブックマークレット版も公開しています。
+
+お使いの環境に合ったエクスポータをご利用ください。
 
 | エクスポータの種類 | 対応OS | メリット |
 |:----------|:---------------|:------|
-| Ruby 版 | Windows, Mac, Linux など（Ruby の動作する環境全般） | 対応 OS が多い、実験的な機能はこちらから実装 |
+| Ruby 版 | Windows, Mac, Linux など（Ruby の動作する環境全般） | 対応 OS が多い、自動アップロード機能あり、実験的な機能はこちらから実装 |
 | PowerShell 版 | Windows（PowerShell 3.0以降が必要） | インストール作業が簡単（ただし、実行権限の設定が必要な場合あり） |
 
 PowerShell 版は <a href="https://twitter.com/sophiarcp" target="_blank">@sophiarcp</a> さんにご提供いただきました。Thanks!
 
-# 最初に注意事項
+# 注意事項
 
 * このツールは非公式なツールです。本ツールの開発者は、このツールを利用することによるいかなる損害についても一切責任を負いません。
 * このツールは、提督情報ページ内の表示に使われる JSON データを、そのままファイルに出力します。そのため、JSON ファイルの形式は、公式サイトの更新に伴って突然変わる可能性があります。
@@ -77,7 +79,14 @@ bundle install
 
 config.yaml.sample （Windows の場合は config.yaml.sample.dos）をコピーして、同じディレクトリに config.yaml ファイルを作成してください。
 
-そして、`SEGA_ID` `PASSWORD` と書かれた箇所に、公式プレイヤーズサイトへのログインに使った SEGA IDとパスワードを記入してください。
+そして、`SEGA_ID`, `PASSWORD`, `API_TOKEN` と書かれた箇所に、以下の情報を記入してください。
+
+- `SEGA_ID`
+    - 公式プレイヤーズサイトのログインに使った SEGA ID
+- `PASSWORD`
+    - 公式プレイヤーズサイトのログインに使ったパスワード
+- `API_TOKEN` （※ 自動アップロード機能を使わない場合は設定不要）
+    - [Admiral Stats](https://www.admiral-stats.com/) の「設定＞API トークンの設定」で確認できる API トークン
 
 ```
 login:
@@ -85,6 +94,8 @@ login:
   password: PASSWORD
 output:
   dir: ./json
+upload:
+  token: API_TOKEN
 ```
 
 ## Ruby 版の実行
@@ -93,7 +104,43 @@ admiral_stats_exporter.rb のあるディレクトリで、以下のコマンド
 実行に成功すると、 `json/コマンドの実行日時` ディレクトリに、最新のプレイデータがエクスポートされます。  
 
 ```
-bundle exec ruby admiral_stats_exporter.rb
+$ bundle exec ruby admiral_stats_exporter.rb
+Succeeded to download Personal_basicInfo_20170309_222344.json
+Succeeded to download Area_captureInfo_20170309_222344.json
+Succeeded to download TcBook_info_20170309_222344.json
+Succeeded to download EquipBook_info_20170309_222344.json
+Succeeded to download Campaign_history_20170309_222344.json
+Succeeded to download Campaign_info_20170309_222344.json
+Succeeded to download Campaign_present_20170309_222344.json
+Succeeded to download CharacterList_info_20170309_222344.json
+Succeeded to download EquipList_info_20170309_222344.json
+Succeeded to download Quest_info_20170309_222344.json
+Succeeded to download Event_info_20170309_222344.json
+Succeeded to download RoomItemList_info_20170309_222344.json
+```
+
+エクスポート後に、Admiral Stats へ JSON ファイルを自動アップロードしたい場合は `--upload` オプションを付けて実行してください。  
+Admiral Stats の「設定＞API ログの確認」で、アップロードに成功したかどうかを確認できます。
+
+```
+$ bundle exec ruby admiral_stats_exporter.rb --upload
+Succeeded to download Personal_basicInfo_20170309_222344.json
+Succeeded to download Area_captureInfo_20170309_222344.json
+Succeeded to download TcBook_info_20170309_222344.json
+Succeeded to download EquipBook_info_20170309_222344.json
+Succeeded to download Campaign_history_20170309_222344.json
+Succeeded to download Campaign_info_20170309_222344.json
+Succeeded to download Campaign_present_20170309_222344.json
+Succeeded to download CharacterList_info_20170309_222344.json
+Succeeded to download EquipList_info_20170309_222344.json
+Succeeded to download Quest_info_20170309_222344.json
+Succeeded to download Event_info_20170309_222344.json
+Succeeded to download RoomItemList_info_20170309_222344.json
+Importable file types: Personal_basicInfo, TcBook_info, CharacterList_info, Event_info
+艦娘一覧のインポートに成功しました。（ファイル名：CharacterList_info_20170309_222344.json）
+イベント進捗情報が空のため、無視されました。（ファイル名：Event_info_20170309_222344.json）
+基本情報のインポートに成功しました。（ファイル名：Personal_basicInfo_20170309_222344.json）
+艦娘図鑑のインポートに成功しました。（ファイル名：TcBook_info_20170309_222344.json）
 ```
 
 # PowerShell 版
@@ -152,10 +199,13 @@ admiral_stats_exporter は、以下のようなファイル名で、プレイデ
 | 装備一覧 | EquipList_info_yyyymmdd_hhmmss.json |
 | 海域情報 | Area_captureInfo_yyyymmdd_hhmmss.json |
 | 任務一覧 | Quest_info_yyyymmdd_hhmmss.json |
+| イベント進捗情報 | Event_info_yyyymmdd_hhmmss.json |
+| 家具一覧 | RoomItemList_info_yyyymmdd_hhmmss.json |
 
 ※ yyyymmdd_hhmmss は、エクスポートを実行した時刻
 
 # 関連ページ
 
 * [Admiral Stats](https://www.admiral-stats.com/)
-* [admiral_stats_parser](https://github.com/muziyoshiz/admiral_stats_parser)
+* [muziyoshiz/admiral_stats](https://github.com/muziyoshiz/admiral_stats)
+* [muziyoshiz/admiral_stats_parser](https://github.com/muziyoshiz/admiral_stats_parser)
