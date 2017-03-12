@@ -11,11 +11,11 @@
 同じ機能を提供する、2種類のエクスポータ（Ruby 版、PowerShell 版）を公開しています。 
 また、[Admiral Stats の使い方](https://www.admiral-stats.com/manual/exporter) にてブックマークレット版も公開しています。
 
-お使いの環境に合ったエクスポータをご利用ください。
+お使いの環境に合ったエクスポータをご利用ください。いずれも、自動アップロード機能を備えています。
 
 | エクスポータの種類 | 対応OS | メリット |
 |:----------|:---------------|:------|
-| Ruby 版 | Windows, Mac, Linux など（Ruby の動作する環境全般） | 対応 OS が多い、自動アップロード機能あり、実験的な機能はこちらから実装 |
+| Ruby 版 | Windows, Mac, Linux など（Ruby の動作する環境全般） | 対応 OS が多い、実験的な機能はこちらから実装 |
 | PowerShell 版 | Windows（PowerShell 3.0以降が必要） | インストール作業が簡単（ただし、実行権限の設定が必要な場合あり） |
 
 PowerShell 版は <a href="https://twitter.com/sophiarcp" target="_blank">@sophiarcp</a> さんにご提供いただきました。Thanks!
@@ -100,6 +100,8 @@ upload:
 
 ## Ruby 版の実行
 
+### エクスポートのみ実行する場合
+
 admiral_stats_exporter.rb のあるディレクトリで、以下のコマンドを実行してください。  
 実行に成功すると、 `json/コマンドの実行日時` ディレクトリに、最新のプレイデータがエクスポートされます。  
 
@@ -118,6 +120,8 @@ Succeeded to download Quest_info_20170309_222344.json
 Succeeded to download Event_info_20170309_222344.json
 Succeeded to download RoomItemList_info_20170309_222344.json
 ```
+
+### エクスポート後に自動アップロードする場合
 
 エクスポート後に、Admiral Stats へ JSON ファイルを自動アップロードしたい場合は `--upload` オプションを付けて実行してください。  
 Admiral Stats の「設定＞API ログの確認」で、アップロードに成功したかどうかを確認できます。
@@ -163,11 +167,19 @@ git を使える場合は master ブランチを clone しても OK です。
 
 ## PowerShell 版の実行
 
+### エクスポートのみ実行する場合
+
 admiral_stats_exporter_ps.ps1 を右クリックして「PowerShell で実行」を選択、または admiral_stats_exporter_ps.bat をダブルクリックして実行します。  
 実行に成功すると、 `json/コマンドの実行日時` ディレクトリに、最新のプレイデータがエクスポートされます。
 
 初回実行時のみ認証情報登録ダイアログが表示されるので、プレイヤーズサイトの [提督情報ページ](https://kancolle-arcade.net/ac/#/top) のID/パスワードを入力してください。
 同フォルダの cred.xml にID/パスワードが記録されます。
+
+### エクスポート後に自動アップロードする場合
+    
+エクスポート後に、Admiral Stats へ JSON ファイルを自動アップロードしたい場合は
+admiral_stats_exporter_ps_doupload.bat をダブルクリックして実行してください。 
+Admiral Stats の「設定＞API ログの確認」で、アップロードに成功したかどうかを確認できます。
 
 ### PowerShell 版を実行時にセキュリティ警告が表示された場合
 
