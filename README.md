@@ -147,6 +147,12 @@ Importable file types: Personal_basicInfo, TcBook_info, CharacterList_info, Even
 艦娘図鑑のインポートに成功しました。（ファイル名：TcBook_info_20170309_222344.json）
 ```
 
+### Windows 上で動かしたときに SSL のエラーが表示された場合
+
+以下のページを参考に、SSL 証明書を設定してください。
+
+- [Windows上のRubyでSSL接続時にcertificate verify failedが出る場合の対処 - Qiita](http://qiita.com/whiteleaf7@github/items/4504b208ad2eec1f9357 "Windows上のRubyでSSL接続時にcertificate verify failedが出る場合の対処 - Qiita")
+
 # PowerShell 版
 
 ## PowerShell 版のインストール手順
