@@ -50,16 +50,26 @@ API_URLS = [
   'RoomItemList/info'
 ]
 
+# Prefix for memo file name
+MEMO_FILE_PREFIX = 'memo'
+
 # Admiral Stats Import URL
 AS_IMPORT_URL = 'https://www.admiral-stats.com/api/v1/import'
 # User Agent for logging on www.admiral-stats.com
 AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-Ruby/1.6.3'
 
 # Check whether to upload JSON files or not
-do_upload = (ARGV[0] == '--upload')
+do_upload = ARGV.include?('--upload')
 if do_upload and config['upload']['token'].to_s.empty?
   puts 'ERROR: For upload, authorization token is required in config.yaml'
   exit 1
+end
+
+# Check whether to output a memo file or not
+memo = nil
+if ARGV.include?('--memo')
+  print 'Memo: '
+  memo = STDIN.gets
 end
 
 # Create new directory for latest JSON files
@@ -121,6 +131,13 @@ API_URLS.each do |api_url|
 
   File.write(json_dir + '/' + filename, res.body)
   puts "Succeeded to download #{filename}"
+end
+
+# Create memo file
+if memo
+  memo_filename = "#{MEMO_FILE_PREFIX}_#{timestamp}.txt"
+  File.write(json_dir + '/' + memo_filename, memo)
+  puts "Succeeded to create #{memo_filename}"
 end
 
 # Upload exported files to Admiral Stats
