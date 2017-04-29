@@ -47,7 +47,10 @@ API_URLS = [
   # 'Event/hold',
 
   # From 2017-02-14
-  'RoomItemList/info'
+  'RoomItemList/info',
+
+  # From REVISION 5 (2017-04-26)
+  'BlueprintList/info'
 ]
 
 # Prefix for memo file name

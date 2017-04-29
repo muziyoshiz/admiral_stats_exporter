@@ -4,3 +4,6 @@ cred.xml
 
 # RubyMine
 /.idea
+
+# Backup for development
+*.bak
