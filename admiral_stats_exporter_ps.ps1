@@ -44,6 +44,12 @@ function putJson2AS ($json_dir, $access_token) {
         if ( -not ($importable_file_types -contains $file_type) ) { continue }
 
         $json = get-content $json_file -Raw -encoding UTF8
+
+        # この GetBytes() がないと、UTF-8 を含む Body（例：艦娘一覧の装備スロット）が
+        # UTF-8 として認識されず、送信時に文字化けする
+        # 参考：https://www.uramiraikan.net/Works/entry-2798.html
+        $json = [System.Text.Encoding]::UTF8.GetBytes($json)
+
         $uri = "$AS_IMPORT_URL/$file_type/$timestamp"
         $res = ""
         try {
