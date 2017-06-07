@@ -14,7 +14,7 @@ function putJson2AS ($json_dir, $access_token) {
     $AS_IMPORT_URL = 'https://www.admiral-stats.com/api/v1/import'
 
     # User Agent for logging on www.admiral-stats.com
-    $AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-PS/1.7.1'
+    $AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-PS/1.7.2'
 
     # Set Authorization header
     $headers = @{ "Authorization" = ("Bearer", $access_token -join " ") }
