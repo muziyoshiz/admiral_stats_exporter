@@ -50,7 +50,10 @@ API_URLS = [
   'RoomItemList/info',
 
   # From REVISION 5 (2017-04-26)
-  'BlueprintList/info'
+  'BlueprintList/info',
+
+  # From VERSION A (2017-09-21)
+  'Exercise/info'
 ]
 
 # Prefix for memo file name
@@ -59,7 +62,7 @@ MEMO_FILE_PREFIX = 'memo'
 # Admiral Stats Import URL
 AS_IMPORT_URL = 'https://www.admiral-stats.com/api/v1/import'
 # User Agent for logging on www.admiral-stats.com
-AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-Ruby/1.7.2'
+AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-Ruby/1.10.0'
 
 # Check whether to upload JSON files or not
 do_upload = ARGV.include?('--upload')
