@@ -14,7 +14,7 @@ function putJson2AS ($json_dir, $access_token) {
     $AS_IMPORT_URL = 'https://www.admiral-stats.com/api/v1/import'
 
     # User Agent for logging on www.admiral-stats.com
-    $AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-PS/1.10.0'
+    $AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-PS/1.15.0'
 
     # Set Authorization header
     $headers = @{ "Authorization" = ("Bearer", $access_token -join " ") }
@@ -145,7 +145,7 @@ try {
 New-Item $outdir -ItemType Directory -Force | Out-Null
 
 try {
-    $infoarray = @("Personal/basicInfo", 'Area/captureInfo', 'TcBook/info', 'EquipBook/info', 'Campaign/history', 'Campaign/info', 'Campaign/present', 'CharacterList/info', 'EquipList/info', 'Quest/info', 'Event/info', 'RoomItemList/info', 'BlueprintList/info', 'Exercise/info')
+    $infoarray = @("Personal/basicInfo", 'Area/captureInfo', 'TcBook/info', 'EquipBook/info', 'Campaign/history', 'Campaign/info', 'Campaign/present', 'CharacterList/info', 'EquipList/info', 'Quest/info', 'Event/info', 'RoomItemList/info', 'BlueprintList/info', 'Exercise/info', 'Cop/info')
     foreach( $infoaddr in $infoArray ) {
         $outfn = $outdir + "\" + $infoaddr.Replace("/", "_") + "_" + $ymdhms + ".json"
         $uri = $api_base + $infoaddr

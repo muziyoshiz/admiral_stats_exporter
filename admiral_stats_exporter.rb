@@ -53,7 +53,12 @@ API_URLS = [
   'BlueprintList/info',
 
   # From VERSION A (2017-09-21)
-  'Exercise/info'
+  'Exercise/info',
+
+  # From VERSION B (2018-07-24)
+  'Cop/info'
+  # 期間限定作戦の開始日とholdStatusのみを返す
+  # 'Cop/hold',
 ]
 
 # Prefix for memo file name
@@ -62,7 +67,7 @@ MEMO_FILE_PREFIX = 'memo'
 # Admiral Stats Import URL
 AS_IMPORT_URL = 'https://www.admiral-stats.com/api/v1/import'
 # User Agent for logging on www.admiral-stats.com
-AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-Ruby/1.10.0'
+AS_HTTP_HEADER_UA = 'AdmiralStatsExporter-Ruby/1.15.0'
 
 # Check whether to upload JSON files or not
 do_upload = ARGV.include?('--upload')

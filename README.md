@@ -219,6 +219,7 @@ admiral_stats_exporter は、以下のようなファイル名で、プレイデ
 | 任務一覧 | Quest_info_yyyymmdd_hhmmss.json |
 | イベント進捗情報 | Event_info_yyyymmdd_hhmmss.json |
 | 家具一覧 | RoomItemList_info_yyyymmdd_hhmmss.json |
+| 期間限定作戦進捗情報 | Cop_info_yyyymmdd_hhmmss.json |
 
 ※ yyyymmdd_hhmmss は、エクスポートを実行した時刻
 
