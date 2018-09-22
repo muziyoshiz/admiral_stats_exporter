@@ -151,7 +151,14 @@ try {
         $uri = $api_base + $infoaddr
         #Invoke-RestMethod -uri $uri -Method Get -Headers $headers -WebSession $sv | ConvertTo-Json -Compress | Out-File $outfn #Invoke-RestMethod 
         Invoke-WebRequest -Uri $uri -UseBasicParsing -WebSession $sv -Headers $headers -OutFile $outfn 
-    }        
+
+        # 204 (No Content) が返された場合はファイルサイズが空になる。その場合はファイルを削除する
+        # Invoke-WebRequest には、正常終了時のステータスコードを取得する方法がなかったため、ファイルサイズで判断
+        if ((Get-ChildItem $outfn).Length -eq 0) {
+            echo "ダウンロードしたファイルが空のため、削除します。対象ファイル: $outfn"
+            Remove-Item $outfn
+        }
+    }
 } catch {
     echo "データ取得中にエラーが発生しました。対象アドレス:  $uri"
     exit 3
