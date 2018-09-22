@@ -135,13 +135,14 @@ API_URLS.each do |api_url|
   # Create filename from URL automatically
   filename = api_url.gsub('/', '_') + "_#{timestamp}.json"
 
-  unless res.status == 200
+  if res.status == 200
+    File.write(json_dir + '/' + filename, res.body)
+    puts "Succeeded to download #{filename}"
+  elsif res.status > 200 && res.status < 300
+    puts "No content. Stopped to download #{filename} (status code = #{res.status})"
+  else
     puts "ERROR: Failed to download #{filename} (status code = #{res.status})"
-    next
   end
-
-  File.write(json_dir + '/' + filename, res.body)
-  puts "Succeeded to download #{filename}"
 end
 
 # Create memo file
