@@ -1,17 +1,12 @@
 # admiral_stats_exporter
 
-[![Join the chat at https://gitter.im/muziyoshiz/admiral_stats](https://badges.gitter.im/muziyoshiz/admiral_stats.svg)](https://gitter.im/muziyoshiz/admiral_stats?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 艦これアーケードの公式プレイヤーズサイト内にある
 [提督情報ページ](https://kancolle-arcade.net/ac/#/top)
 から、自分のプレイデータをエクスポートする非公式ツールです。
 
+**このツールの開発および www.admiral-stats.com でのサービス提供はすでに終了しています。**
+
 # Ruby 版と PowerShell 版があります
-
-同じ機能を提供する、2種類のエクスポータ（Ruby 版、PowerShell 版）を公開しています。 
-また、[Admiral Stats の使い方](https://www.admiral-stats.com/manual/exporter) にてブックマークレット版も公開しています。
-
-お使いの環境に合ったエクスポータをご利用ください。いずれも、自動アップロード機能を備えています。
 
 | エクスポータの種類 | 対応OS | メリット |
 |:----------|:---------------|:------|
@@ -86,7 +81,7 @@ config.yaml.sample （Windows の場合は config.yaml.sample.dos）をコピー
 - `PASSWORD`
     - 公式プレイヤーズサイトのログインに使ったパスワード
 - `API_TOKEN` （※ 自動アップロード機能を使わない場合は設定不要）
-    - [Admiral Stats](https://www.admiral-stats.com/) の「設定＞API トークンの設定」で確認できる API トークン
+    - Admiral Stats の「設定＞API トークンの設定」で確認できる API トークン
 
 ```
 login:
@@ -206,7 +201,6 @@ ID/パスワードを間違えた場合、または SEGA のID/パスワード�
 # エクスポートされたファイルの詳細（Ruby/PowerShell 共通）
 
 admiral_stats_exporter は、以下のようなファイル名で、プレイデータをエクスポートします。  
-これらのファイルを、<a href="https://www.admiral-stats.com/" target="_blank">Admiral Stats</a> の<a href="https://www.admiral-stats.com/import" target="_blank">「インポート」ページ</a>からアップロードしてください。
 
 | 提督情報での表示 | ファイル名 |
 |:----------|:---------------|
@@ -225,6 +219,5 @@ admiral_stats_exporter は、以下のようなファイル名で、プレイデ
 
 # 関連ページ
 
-* [Admiral Stats](https://www.admiral-stats.com/)
 * [muziyoshiz/admiral_stats](https://github.com/muziyoshiz/admiral_stats)
 * [muziyoshiz/admiral_stats_parser](https://github.com/muziyoshiz/admiral_stats_parser)
